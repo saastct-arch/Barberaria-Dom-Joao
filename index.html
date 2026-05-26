@@ -8,7 +8,7 @@
 
 <meta property="og:title" content="Barbearia Dom João — Coronel Fabriciano" />
 <meta property="og:description" content="Cortes precisos, ambiente vintage e aquela conversa boa de sempre. Agende seu horário." />
-<meta property="og:image" content="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200" />
+<meta property="og:image" content="assets/Inicial.jpg" />
 <meta property="og:type" content="website" />
 <meta name="theme-color" content="#8b1a2a" />
 
@@ -21,10 +21,10 @@
    TOKENS
    ========================================================= */
 :root{
-  --bg:         #0a0a14;
-  --bg-alt:     #12080f;
-  --bg-cool:    #0d0818;
-  --bg-deep:    #050508;
+  --bg:         #0a0a14;   /* azul-preto profundo */
+  --bg-alt:     #12080f;   /* vermelho-preto */
+  --bg-cool:    #0d0818;   /* roxo-preto (depoimentos) */
+  --bg-deep:    #050508;   /* footer */
   --gold:       #b8973a;
   --gold-soft:  rgba(201,168,76,.35);
   --gold-line:  rgba(201,168,76,.22);
@@ -137,9 +137,7 @@ button{ font: inherit; color: inherit; background: none; border: 0; cursor: poin
   color: var(--gold);
 }
 
-/* =========================================================
-   BUTTONS
-   ========================================================= */
+/* CTA — borda dourada que aparece no hover */
 .btn{
   display: inline-block;
   position: relative;
@@ -372,7 +370,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
 }
 .hero__bg{
   position: absolute; inset: 0;
-  background: url("https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1800") center/cover no-repeat;
+  background: url("assets/Inicial.jpg") center/cover no-repeat;
   z-index: -2;
   transform: scale(1.04);
   filter: saturate(.9) contrast(1.05);
@@ -898,6 +896,191 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
 @media (min-width: 881px){
   .mobile-cta-fixed{ display: none; }
 }
+
+/* =========================================================
+   HERO LOGIN LINK
+   ========================================================= */
+.hero__login{
+  margin-top: 20px;
+  text-align: center;
+}
+.hero__login-link{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  opacity: .65;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity .25s var(--ease), color .25s var(--ease);
+}
+.hero__login-link:hover{ opacity: 1; color: var(--gold); }
+
+/* =========================================================
+   MODAL DE AGENDAMENTO
+   ========================================================= */
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal.is-open{ display: flex; }
+.modal__overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(5,5,8,.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: modalFade .35s var(--ease) both;
+}
+.modal__panel{
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--gold-soft);
+  padding: 44px 36px 36px;
+  animation: modalRise .45s var(--ease) both;
+}
+@keyframes modalFade{
+  from{ opacity: 0; }
+  to  { opacity: 1; }
+}
+@keyframes modalRise{
+  from{ opacity: 0; transform: translateY(20px); }
+  to  { opacity: 1; transform: translateY(0); }
+}
+.modal__close{
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 36px; height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream-dim);
+  cursor: none;
+  transition: color .25s var(--ease);
+}
+.modal__close:hover{ color: var(--gold); }
+.modal__close svg{ width: 16px; height: 16px; }
+.modal__eyebrow{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: .8;
+  margin: 0 0 10px;
+  text-align: center;
+}
+.modal__title{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 34px;
+  letter-spacing: -.02em;
+  color: var(--cream);
+  text-align: center;
+  margin: 0 0 30px;
+  line-height: 1;
+}
+.modal__form{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field label{
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.field input,
+.field select{
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--cream);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(201,168,76,.22);
+  padding: 12px 14px;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+  width: 100%;
+}
+.field input:focus,
+.field select:focus{
+  border-color: var(--gold);
+  outline: none;
+  background: rgba(255,255,255,.06);
+}
+.field select{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23b8973a' stroke-width='1.4'><path d='M1 1.5l5 5 5-5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 8px;
+  padding-right: 38px;
+}
+.field input::placeholder{ color: rgba(168,152,128,.5); }
+.field select option{
+  background: #0a0a14;
+  color: var(--cream);
+  font-family: var(--sans);
+  padding: 8px;
+}
+.field select option:disabled{
+  color: rgba(168,152,128,.6);
+}
+.field select:invalid,
+.field select:has(option[value=""]:checked){
+  color: var(--cream);
+}
+.field-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.modal__actions{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.modal__actions .btn,
+.modal__actions .btn--ghost{
+  width: 100%;
+  text-align: center;
+  padding: 16px 20px;
+}
+.modal__actions .btn--ghost{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  display: inline-block;
+  cursor: none;
+}
+@media (max-width: 880px){
+  .modal__panel{ padding: 40px 22px 28px; }
+  .modal__title{ font-size: 28px; }
+  .field-row{ grid-template-columns: 1fr; }
+}
+
+body.modal-open{ overflow: hidden; }
 </style>
 </head>
 
@@ -920,7 +1103,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
     <a href="#horarios">Horários</a>
   </div>
 
-  <a href="agendamento.html" class="nav__cta">Agendar</a>
+  <a href="#" onclick="abrirModal(); return false;" class="nav__cta">Agendar</a>
 
   <button class="nav__burger" id="burger" aria-label="Abrir menu" aria-controls="drawer" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -935,7 +1118,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
   <a href="#galeria" data-close>Galeria</a>
   <a href="#depoimentos" data-close>Depoimentos</a>
   <a href="#horarios" data-close>Horários</a>
-  <a href="agendamento.html" class="nav__cta">Agendar</a>
+  <a href="#" onclick="abrirModal(); return false;" class="nav__cta">Agendar</a>
 </aside>
 
 <!-- ===== HERO ===== -->
@@ -944,12 +1127,20 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
   <div class="hero__overlay" aria-hidden="true"></div>
   <div class="hero__inner">
     <p class="hero__eyebrow reveal">CENTRO DE CORONEL FABRICIANO</p>
-    <h1 class="hero__title reveal" style="--delay:.1s">
+        <h1 class="hero__title reveal" style="--delay:.1s">
       Onde o estilo<br>
       encontra a <em style="color:var(--gold);font-style:normal">tradição.</em>
     </h1>
     <p class="hero__sub reveal" style="--delay:.2s">Cortes precisos. Ambiente único. Aquela conversa boa de sempre.</p>
-    <a class="btn hero__cta reveal" href="agendamento.html" style="--delay:.3s">Agendar meu horário</a>
+    <a class="btn hero__cta reveal" href="#" onclick="abrirModal(); return false;" style="--delay:.3s">Agendar meu horário</a>
+    <div class="hero__login reveal" style="--delay:.4s">
+      <a href="/login" class="hero__login-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="14" height="14" aria-hidden="true">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Acesso interno
+      </a>
+    </div>
   </div>
   <svg class="hero__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
     <path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1012,6 +1203,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
       </div>
       <div class="pilar reveal" style="--delay:.2s">
         <svg class="pilar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- scissors -->
           <circle cx="14" cy="14" r="5"/>
           <circle cx="14" cy="34" r="5"/>
           <path d="M18 18l22 18"/>
@@ -1022,6 +1214,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
       </div>
       <div class="pilar reveal" style="--delay:.3s">
         <svg class="pilar__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- calendar -->
           <rect x="8" y="11" width="32" height="29" rx="2"/>
           <path d="M8 19h32"/>
           <path d="M16 7v8M32 7v8"/>
@@ -1050,7 +1243,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
     </div>
 
     <p class="section-eyebrow reveal">— Cardápio —</p>
-    <h2 class="section-title reveal">Nossos Serviços</h2>
+    <h2 class="section-title reveal" data-comment-anchor="2e2e764bdc-h2">Nossos Serviços</h2>
     <p class="section-lede reveal" style="--delay:.1s">
       Do clássico ao moderno, com a mão firme de quem entende do ofício.
     </p>
@@ -1114,7 +1307,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
     </ul>
 
     <div class="servicos__cta reveal">
-      <a class="btn" href="agendamento.html">Quero agendar</a>
+      <a class="btn" href="#" onclick="abrirModal(); return false;">Quero agendar</a>
     </div>
   </div>
 </section>
@@ -1133,21 +1326,21 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
       <span class="line"></span>
     </div>
 
-    <p class="section-eyebrow reveal">— Ambiente &amp; detalhes —</p>
+    <p class="section-eyebrow reveal">— Ambiente & detalhes —</p>
     <h2 class="section-title reveal">Galeria</h2>
 
     <div class="galeria__grid">
       <a class="galeria__item reveal" style="--delay:.05s" href="https://www.instagram.com/barbearia_domjoao/" target="_blank" rel="noopener">
-        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800" alt="Cliente sendo atendido na cadeira de barbeiro" loading="lazy"/>
+        <img src="assets/img01.jpg" alt="Ambiente da Barbearia Dom João — TV retrô e luzes" loading="lazy"/>
       </a>
       <a class="galeria__item reveal" style="--delay:.1s" href="https://www.instagram.com/barbearia_domjoao/" target="_blank" rel="noopener">
-        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800" alt="Detalhes do ambiente da barbearia" loading="lazy"/>
+        <img src="assets/img02.jpg" alt="Amigos jogando RPG na Barbearia Dom João" loading="lazy"/>
       </a>
       <a class="galeria__item reveal" style="--delay:.15s" href="https://www.instagram.com/barbearia_domjoao/" target="_blank" rel="noopener">
-        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800" alt="Ferramentas tradicionais de barbeiro" loading="lazy"/>
+        <img src="assets/img03.jpg" alt="Salão da Barbearia Dom João com placa neon e caneco" loading="lazy"/>
       </a>
       <a class="galeria__item reveal" style="--delay:.2s" href="https://www.instagram.com/barbearia_domjoao/" target="_blank" rel="noopener">
-        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800" alt="Cadeira de barbeiro vintage" loading="lazy"/>
+        <img src="assets/img04.jpg" alt="Barbeiros da Dom João atendendo clientes" loading="lazy"/>
       </a>
     </div>
 
@@ -1180,37 +1373,37 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
 
     <div class="depo__grid">
       <article class="depo__card reveal" style="--delay:.05s">
-        <span class="depo__quote" aria-hidden="true">"</span>
+        <span class="depo__quote" aria-hidden="true">“</span>
         <p class="depo__text">A mais top da região.</p>
         <div class="depo__stars" aria-label="5 estrelas">★★★★★</div>
         <p class="depo__name">— Carlos M.</p>
       </article>
       <article class="depo__card reveal" style="--delay:.1s">
-        <span class="depo__quote" aria-hidden="true">"</span>
+        <span class="depo__quote" aria-hidden="true">“</span>
         <p class="depo__text">Melhor barbearia da região. Galera profissional. Recomendo.</p>
         <div class="depo__stars" aria-label="5 estrelas">★★★★★</div>
-        <p class="depo__name">— Rafael S.</p>
+        <p class="depo__name">— MARCELO</p>
       </article>
       <article class="depo__card reveal" style="--delay:.15s">
-        <span class="depo__quote" aria-hidden="true">"</span>
-        <p class="depo__text">Lugar diferenciado. Excelentes profissionais!</p>
+        <span class="depo__quote" aria-hidden="true">“</span>
+        <p class="depo__text">Lugar diferenciado. Excelentes profissionais.</p>
         <div class="depo__stars" aria-label="5 estrelas">★★★★★</div>
-        <p class="depo__name">— Bruno A.</p>
+        <p class="depo__name">— F. VITAL</p>
       </article>
       <article class="depo__card reveal" style="--delay:.2s">
-        <span class="depo__quote" aria-hidden="true">"</span>
+        <span class="depo__quote" aria-hidden="true">“</span>
         <p class="depo__text">A melhor da cidade. Ambiente vintage ótimo pra tirar fotos.</p>
         <div class="depo__stars" aria-label="5 estrelas">★★★★★</div>
-        <p class="depo__name">— Thiago L.</p>
+        <p class="depo__name">— ANDRÉ</p>
       </article>
       <article class="depo__card reveal" style="--delay:.25s">
-        <span class="depo__quote" aria-hidden="true">"</span>
+        <span class="depo__quote" aria-hidden="true">“</span>
         <p class="depo__text">Ambiente diferenciado, melhor happy hour.</p>
         <div class="depo__stars" aria-label="5 estrelas">★★★★★</div>
-        <p class="depo__name">— Rodrigo F.</p>
+        <p class="depo__name">— MARCO TULIO</p>
       </article>
       <article class="depo__card reveal" style="--delay:.3s">
-        <span class="depo__quote" aria-hidden="true">"</span>
+        <span class="depo__quote" aria-hidden="true">“</span>
         <p class="depo__text">Lugar diferenciado. Ótimo atendimento.</p>
         <div class="depo__stars" aria-label="5 estrelas">★★★★★</div>
         <p class="depo__name">— Felipe C.</p>
@@ -1251,7 +1444,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
     </div>
 
     <div class="horarios__cta reveal">
-      <a class="btn" href="agendamento.html">Garantir meu horário</a>
+      <a class="btn" href="#" onclick="abrirModal(); return false;">Garantir meu horário</a>
     </div>
   </div>
 </section>
@@ -1262,7 +1455,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
     <h2 class="cta__title reveal">Pronto pra chegar diferente?</h2>
     <p class="cta__sub reveal" style="--delay:.1s">Agende agora e garanta seu horário na Dom João.</p>
     <div class="cta__actions reveal" style="--delay:.2s">
-      <a class="btn btn--light" href="agendamento.html">Agendar meu horário</a>
+      <a class="btn btn--light" href="#" onclick="abrirModal(); return false;">Agendar meu horário</a>
       <a class="cta__whats" href="https://wa.me/5531988798017" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M20.5 3.5A11.4 11.4 0 0 0 12.05 0C5.45 0 .1 5.35.1 11.95c0 2.1.55 4.15 1.6 5.95L0 24l6.3-1.65a11.94 11.94 0 0 0 5.7 1.45h.01c6.6 0 11.95-5.35 11.95-11.95 0-3.2-1.25-6.2-3.46-8.35zM12.05 21.8h-.01a9.85 9.85 0 0 1-5.02-1.38l-.36-.21-3.74.98 1-3.64-.24-.37a9.86 9.86 0 0 1-1.51-5.23c0-5.45 4.44-9.88 9.88-9.88 2.64 0 5.12 1.03 6.98 2.9a9.83 9.83 0 0 1 2.9 6.99c0 5.45-4.43 9.88-9.88 9.88zm5.42-7.39c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.78-1.48-1.75-1.66-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01a1.1 1.1 0 0 0-.8.37c-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.18-1.42-.07-.13-.27-.2-.57-.35z"/>
@@ -1293,7 +1486,62 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
   <p class="footer__copy">© 2025 Barbearia Dom João. Todos os direitos reservados.</p>
 </footer>
 
-<a class="mobile-cta-fixed" href="agendamento.html">Agendar meu horário &rarr;</a>
+<a class="mobile-cta-fixed" href="#" onclick="abrirModal(); return false;">Agendar meu horário &rarr;</a>
+
+<!-- ===== MODAL DE AGENDAMENTO ===== -->
+<div class="modal" id="modal-agendamento" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__panel" role="document">
+    <button type="button" class="modal__close" aria-label="Fechar" data-close-modal>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+
+    <p class="modal__eyebrow">Dom João · Coronel Fabriciano</p>
+    <h2 class="modal__title" id="modal-title">Agendar Horário</h2>
+
+    <form class="modal__form" id="form-agendamento" novalidate>
+      <div class="field">
+        <label for="f-nome">Primeiro nome</label>
+        <input type="text" id="f-nome" name="nome" autocomplete="given-name" placeholder="Seu primeiro nome" required />
+      </div>
+
+      <div class="field">
+        <label for="f-tel">Telefone</label>
+        <input type="tel" id="f-tel" name="telefone" autocomplete="tel" inputmode="numeric" placeholder="(31) 98822-0152" maxlength="16" required />
+      </div>
+
+      <div class="field">
+        <label for="f-barbeiro">Barbeiro</label>
+        <select id="f-barbeiro" name="barbeiro" required>
+          <option value="" disabled selected>Selecione</option>
+          <option value="Lucas">Lucas</option>
+          <option value="Natan">Natan</option>
+          <option value="Calebe">Calebe</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-data">Data</label>
+          <input type="date" id="f-data" name="data" required />
+        </div>
+        <div class="field">
+          <label for="select-hora">Hora</label>
+          <select id="select-hora" name="hora" required>
+            <option value="" disabled selected>Selecione uma data</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal__actions">
+        <button type="submit" class="btn">Confirmar Agendamento</button>
+        <button type="button" class="btn--ghost" data-close-modal>Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script>
 /* =========================================================
@@ -1366,7 +1614,7 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
     cur.style.left = e.clientX + 'px';
     cur.style.top  = e.clientY + 'px';
   });
-  document.querySelectorAll('a, button, .servico, .galeria__item, .depo__card').forEach(el => {
+  const bindCursor = (el) => {
     el.addEventListener('mouseenter', () => {
       cur.style.width  = '32px';
       cur.style.height = '32px';
@@ -1380,6 +1628,255 @@ body.menu-open .scrim{ opacity: 1; pointer-events: auto; }
       cur.style.background = 'var(--gold)';
       cur.style.border = 'none';
     });
+  };
+  document.querySelectorAll('a, button, .servico, .galeria__item, .depo__card, .modal__close, .field input, .field select')
+    .forEach(bindCursor);
+})();
+
+/* =========================================================
+   MODAL DE AGENDAMENTO
+   ========================================================= */
+(function(){
+  const modal     = document.getElementById('modal-agendamento');
+  const form      = document.getElementById('form-agendamento');
+  const inputData = document.getElementById('f-data');
+  const selectHora= document.getElementById('select-hora');
+
+  if (!modal) return;
+
+  // DDDs válidos no Brasil
+  const DDDS_VALIDOS = new Set([
+    11,12,13,14,15,16,17,18,19,         // SP
+    21,22,24,27,28,                     // RJ/ES
+    31,32,33,34,35,37,38,               // MG
+    41,42,43,44,45,46,                  // PR
+    47,48,49,                           // SC
+    51,53,54,55,                        // RS
+    61,62,63,64,65,66,67,68,69,         // CO/N
+    71,73,74,75,77,79,                  // BA/SE
+    81,82,83,84,85,86,87,88,89,         // NE
+    91,92,93,94,95,96,97,98,99          // N
+  ]);
+
+  const inputTel = document.getElementById('f-tel');
+
+  function formatarTelefone(raw){
+    const d = raw.replace(/\D/g, '').slice(0, 11);
+    if (d.length === 0) return '';
+    if (d.length <= 2) return '(' + d;
+    if (d.length <= 7) return '(' + d.slice(0,2) + ') ' + d.slice(2);
+    if (d.length <= 10){
+      // fixo: (XX) XXXX-XXXX  ou interm: (XX) XXXXX...
+      return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6);
+    }
+    return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+  }
+
+  inputTel.addEventListener('input', () => {
+    const cursorEnd = inputTel.selectionStart === inputTel.value.length;
+    inputTel.value = formatarTelefone(inputTel.value);
+    if (cursorEnd){
+      const len = inputTel.value.length;
+      inputTel.setSelectionRange(len, len);
+    }
+    inputTel.setCustomValidity('');
+  });
+  inputTel.addEventListener('keypress', (e) => {
+    // bloquear qualquer coisa que não seja dígito
+    if (e.key.length === 1 && !/\d/.test(e.key)) e.preventDefault();
+  });
+  inputTel.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text');
+    inputTel.value = formatarTelefone(text);
+  });
+
+  function validarTelefone(valor){
+    const d = valor.replace(/\D/g, '');
+    if (d.length !== 10 && d.length !== 11) return { ok:false, msg:'Telefone incompleto. Use (DDD) + número.' };
+    const ddd = parseInt(d.slice(0,2), 10);
+    if (!DDDS_VALIDOS.has(ddd))            return { ok:false, msg:'DDD inválido.' };
+    // celular precisa começar com 9
+    if (d.length === 11 && d[2] !== '9')   return { ok:false, msg:'Celular deve começar com 9 após o DDD.' };
+    return { ok:true, digitos:d };
+  }
+
+  // janelas de funcionamento (24h):
+  //   seg–sex: 09:00 – 19:30 (último slot, fecha 20h00)
+  //   sábado:  08:00 – 17:30 (último slot, fecha 18h00)
+  //   domingo: fechado
+  function janelaParaData(dateStr){
+    if (!dateStr) return null;
+    const [y,m,d] = dateStr.split('-').map(Number);
+    const dt = new Date(y, m-1, d);
+    const dow = dt.getDay(); // 0 dom … 6 sab
+    if (dow === 0) return { fechado: true };
+    if (dow === 6) return { startH:8,  startM:0,  endH:17, endM:30 };
+    return            { startH:9,  startM:0,  endH:19, endM:30 };
+  }
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function popularHorarios(){
+    const dateStr = inputData.value;
+    selectHora.innerHTML = '';
+    selectHora.disabled = false;
+
+    if (!dateStr){
+      selectHora.innerHTML = '<option value="" disabled selected>Selecione uma data</option>';
+      selectHora.disabled = true;
+      return;
+    }
+
+    // bloquear datas no passado
+    const [yy,mm2,dd] = dateStr.split('-').map(Number);
+    const sel  = new Date(yy, mm2-1, dd);
+    const hojeMid = new Date();
+    hojeMid.setHours(0,0,0,0);
+    if (sel < hojeMid){
+      selectHora.innerHTML = '<option value="" disabled selected>Data inválida — escolha uma data futura</option>';
+      selectHora.disabled = true;
+      return;
+    }
+
+    const j = janelaParaData(dateStr);
+    if (!j){
+      selectHora.innerHTML = '<option value="" disabled selected>Data inválida</option>';
+      selectHora.disabled = true;
+      return;
+    }
+    if (j.fechado){
+      selectHora.innerHTML = '<option value="" disabled selected>Fechado aos domingos</option>';
+      selectHora.disabled = true;
+      return;
+    }
+
+    // hoje?
+    const hoje = new Date();
+    const [y,m,d] = dateStr.split('-').map(Number);
+    const ehHoje = (hoje.getFullYear() === y && (hoje.getMonth()+1) === m && hoje.getDate() === d);
+    const minMinutosDoDia = ehHoje
+      ? (hoje.getHours() * 60 + hoje.getMinutes() + 30) // +30min de margem
+      : -1;
+
+    const inicio = j.startH * 60 + j.startM;
+    const fim    = j.endH   * 60 + j.endM;
+
+    const opts = [];
+    for (let mm = inicio; mm <= fim; mm += 30){
+      if (mm < minMinutosDoDia) continue;
+      const hh = Math.floor(mm / 60);
+      const mn = mm % 60;
+      const label = pad(hh) + ':' + pad(mn);
+      opts.push('<option value="' + label + '">' + label + '</option>');
+    }
+
+    if (opts.length === 0){
+      selectHora.innerHTML = '<option value="" disabled selected>Sem horários disponíveis hoje</option>';
+      selectHora.disabled = true;
+      return;
+    }
+
+    selectHora.innerHTML = '<option value="" disabled selected>Selecione</option>' + opts.join('');
+  }
+
+  function configurarLimitesDeData(){
+    const hoje = new Date();
+    const max  = new Date();
+    max.setDate(max.getDate() + 7);
+    const fmt = (dt) => dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate());
+    inputData.min = fmt(hoje);
+    inputData.max = fmt(max);
+  }
+
+  inputData.addEventListener('change', popularHorarios);
+
+  // open / close (exposed globally)
+  window.abrirModal = function(){
+    configurarLimitesDeData();
+    popularHorarios();
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    setTimeout(() => {
+      const first = modal.querySelector('#f-nome');
+      if (first) first.focus();
+    }, 60);
+  };
+  window.fecharModal = function(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    form.reset();
+    selectHora.innerHTML = '<option value="" disabled selected>Selecione uma data</option>';
+    selectHora.disabled = true;
+  };
+
+  modal.querySelectorAll('[data-close-modal]').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); window.fecharModal(); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) window.fecharModal();
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = {
+      nome:     form.nome.value.trim(),
+      telefone: form.telefone.value.trim(),
+      barbeiro: form.barbeiro.value,
+      data:     form.data.value,
+      hora:     form.hora.value
+    };
+
+    // validação por campo, na ordem do formulário
+    if (!data.nome){
+      alert('Por favor, preencha seu primeiro nome.');
+      form.nome.focus();
+      return;
+    }
+    if (!data.telefone){
+      alert('Por favor, preencha o número do telefone.');
+      inputTel.focus();
+      return;
+    }
+    const tel = validarTelefone(data.telefone);
+    if (!tel.ok){
+      alert('Preencha corretamente o número do telefone. ' + tel.msg + '\nExemplo: (31) 98822-0152');
+      inputTel.focus();
+      return;
+    }
+    data.telefone = tel.digitos; // só dígitos no payload
+
+    if (!data.barbeiro){
+      alert('Por favor, selecione o barbeiro.');
+      form.barbeiro.focus();
+      return;
+    }
+    if (!data.data){
+      alert('Por favor, selecione a data do agendamento.');
+      form.data.focus();
+      return;
+    }
+    // validação extra: data não pode ser anterior a hoje
+    const [yy,mm2,dd] = data.data.split('-').map(Number);
+    const sel = new Date(yy, mm2-1, dd);
+    const hojeMid = new Date();
+    hojeMid.setHours(0,0,0,0);
+    if (sel < hojeMid){
+      alert('A data escolhida já passou. Selecione uma data válida.');
+      form.data.focus();
+      return;
+    }
+    if (!data.hora){
+      alert('Por favor, selecione o horário do agendamento.');
+      selectHora.focus();
+      return;
+    }
+
+    console.log(data);
+    alert('Horário reservado! Em breve entraremos em contato.');
+    window.fecharModal();
   });
 })();
 </script>
